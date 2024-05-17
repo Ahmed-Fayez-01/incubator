@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:incubator/core/colors/app_colors.dart';
+import 'package:incubator/core/enums/data_type.dart';
 import 'package:incubator/core/text_styles/styles.dart';
 import 'package:incubator/core/utils/constants.dart';
+import 'package:incubator/views/auth/auth_intro_view.dart';
 import '../../core/assets/assets.dart';
+import '../../core/services/local/cache_helper/cache_helper.dart';
 import '../onboarding/onboarding_screen.dart';
 
 class SplashView extends StatefulWidget {
@@ -18,9 +21,18 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushAndRemoveUntil(
-          context, MaterialPageRoute(builder: (context) => const OnBoardingView()), (
-          route) => false);
+      if(CacheHelper.getData(key: "onBoarding", dataType: DataType.bool)==true)
+        {
+          Navigator.pushAndRemoveUntil(
+              context, MaterialPageRoute(builder: (context) => const AuthIntroView()), (
+              route) => false);
+        }else
+          {
+            Navigator.pushAndRemoveUntil(
+                context, MaterialPageRoute(builder: (context) => const OnBoardingView()), (
+                route) => false);
+          }
+
     });
   }
   @override
