@@ -2,5 +2,13 @@
   "lang": "Language",
   "onBoardingDescription0": "Find a lot of specialist doctors in one place.",
   "onBoardingDescription1": "Get advice only from a doctor you believe in.",
-  "onBoardingDescription2": "Get advice only from a doctor you believe in."
+  "onBoardingDescription2": "Get advice only from a doctor you believe in.",
+  "emailValidationSyntaxText": "Email not valid",
+  "emailHintText": "Enter your email",
+  "userHintText": "Enter your name",
+  "emailLabelText": "Email",
+  "passwordHintText": "Enter your password",
+  "ValidationEmptyText": "Field Must not be Empty",
+  "forgetPasswordText": "Forget Password ?",
+  "signup": "Sign Up"
 }

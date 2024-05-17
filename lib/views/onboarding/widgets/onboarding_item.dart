@@ -8,6 +8,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../../../../../core/assets/assets.dart';
 import '../../../../../core/services/local/cache_helper/cache_helper.dart';
 import '../../../../../core/text_styles/styles.dart';
+import '../../auth/auth_intro_view.dart';
 
 class OnBoardingItem extends StatelessWidget {
   const OnBoardingItem(
@@ -42,45 +43,65 @@ class OnBoardingItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: AppConstant.width20(context)),
-                    child: const Text("Skip"),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: AppConstant.width20(context)),
+                    child: GestureDetector(onTap: (){
+                      CacheHelper.saveData(key: "onBoarding", value: true);
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AuthIntroView()),
+                              (route) => false);
+                    },child: const Text("Skip")),
                   ),
                 ],
               ),
-              SizedBox(height: AppConstant.height30(context),),
               SizedBox(
-                height: MediaQuery.of(context).size.height*.5,
+                height: AppConstant.height30(context),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .55,
                 child: Stack(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(right: AppConstant.width20(context),top: AppConstant.height20(context)),
+                          padding: EdgeInsets.only(
+                              right: AppConstant.width20(context),
+                              top: AppConstant.height20(context)),
                           child: Image.asset("assets/images/background.png"),
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        image,
-                      ],
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .54,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          image,
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: AppConstant.height20(context),),
+              SizedBox(
+                height: AppConstant.height20(context),
+              ),
               Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width * .12,vertical: MediaQuery.of(context).size.width * .05),
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * .12,
+                    vertical: MediaQuery.of(context).size.width * .05),
                 child: Text(
                   description,
                   style: Styles.onBoardingDescriptionText(context),
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(height: AppConstant.height20(context),),
+              SizedBox(
+                height: AppConstant.height20(context),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -107,7 +128,10 @@ class OnBoardingItem extends StatelessWidget {
                     child: CircleAvatar(
                       radius: MediaQuery.of(context).size.width * .07,
                       backgroundColor: const Color(0xffDCDCDC),
-                      child: SvgPicture.asset(AssetData.arrowLeft,width: MediaQuery.of(context).size.width * .06,),
+                      child: SvgPicture.asset(
+                        AssetData.arrowLeft,
+                        width: MediaQuery.of(context).size.width * .06,
+                      ),
                     ),
                   )),
             ),
@@ -116,15 +140,16 @@ class OnBoardingItem extends StatelessWidget {
               padding: EdgeInsets.all(MediaQuery.of(context).size.width * .05),
               child: GestureDetector(
                 onTap: () {
-                  if(isLastScreen)
-                    {
-                      CacheHelper.saveData(key: "oldNotificationLength", value: "0");
-                      CacheHelper.saveData(key: "onBoarding", value: true);
-                      // GoRouter.of(context).go("/loginView");
-                    }else{
+                  if (isLastScreen) {
+                    CacheHelper.saveData(key: "onBoarding", value: true);
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AuthIntroView()),
+                        (route) => false);
+                  } else {
                     onNextPressed(currentScreenNo + 1);
                   }
-
                 },
                 child: CircularPercentIndicator(
                   radius: MediaQuery.of(context).size.width * .08,
@@ -133,7 +158,10 @@ class OnBoardingItem extends StatelessWidget {
                   center: CircleAvatar(
                     radius: MediaQuery.of(context).size.width * .065,
                     backgroundColor: CustomColor.primaryColor,
-                    child: SvgPicture.asset(AssetData.arrowRight,width: MediaQuery.of(context).size.width * .06,),
+                    child: SvgPicture.asset(
+                      AssetData.arrowRight,
+                      width: MediaQuery.of(context).size.width * .06,
+                    ),
                   ),
                   progressColor: CustomColor.primaryColor,
                   backgroundColor: Colors.white,
