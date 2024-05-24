@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:incubator/core/colors/app_colors.dart';
-import 'package:incubator/views/onboarding/widgets/onboarding_view_body.dart';
+import 'package:incubator/features/onboarding/widgets/onboarding_view_body.dart';
 
 class OnBoardingView extends StatelessWidget {
   const OnBoardingView({Key? key}) : super(key: key);

@@ -4,9 +4,9 @@ import 'package:incubator/core/colors/app_colors.dart';
 import 'package:incubator/core/enums/data_type.dart';
 import 'package:incubator/core/text_styles/styles.dart';
 import 'package:incubator/core/utils/constants.dart';
-import 'package:incubator/views/auth/auth_intro_view.dart';
 import '../../core/assets/assets.dart';
 import '../../core/services/local/cache_helper/cache_helper.dart';
+import '../auth/auth_intro_view.dart';
 import '../onboarding/onboarding_screen.dart';
 
 class SplashView extends StatefulWidget {
@@ -52,7 +52,7 @@ class _SplashViewState extends State<SplashView> {
             ),
           )
       ),
-      body: Column(
+      body: Stack(
         children: [
           Row(
             children: [
@@ -84,7 +84,9 @@ class _SplashViewState extends State<SplashView> {
                   ],
                 ),
                 SizedBox(height: AppConstant.height10(context),),
-                Text("My Incubator",style: Styles.splashTitle(context),),
+                Text("My Incubator",style: Styles.splashTitle(context).copyWith(
+                  color: Colors.white
+                ),),
               ],
             ),
           ),

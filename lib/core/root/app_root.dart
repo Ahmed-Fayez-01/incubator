@@ -1,14 +1,14 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../core/enums/data_type.dart';
-import '../core/services/local/cache_helper/cache_helper.dart';
-import '../core/services/local/cache_helper/cache_keys.dart';
-import '../core/theme/app_theme.dart';
-import '../views/splash/splash_view.dart';
+import '../../features/splash/splash_view.dart';
+import '../enums/data_type.dart';
+import '../services/local/cache_helper/cache_helper.dart';
+import '../services/local/cache_helper/cache_keys.dart';
+import '../theme/app_theme.dart';
+
 
 class AppRoot extends StatefulWidget {
   const AppRoot({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class _AppRootState extends State<AppRoot> {
   @override
   Widget build(BuildContext context) {
     return EasyLocalization(
-      path: "lib/lang",
+      path: "lib/core/lang",
       supportedLocales: const [Locale("ar"), Locale("en")],
       saveLocale: true,
       child: ScreenUtilInit(

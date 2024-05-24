@@ -5,13 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:incubator/core/colors/app_colors.dart';
-import 'package:incubator/views/auth/auth_intro_view.dart';
 
 import '../../core/assets/assets.dart';
 import '../../core/shared_components/custom_button.dart';
 import '../../core/shared_components/default_text_form_field.dart';
 import '../../core/text_styles/styles.dart';
 import '../../core/utils/constants.dart';
+import 'auth_intro_view.dart';
 
 class IncubatorRegisterView extends StatefulWidget {
   const IncubatorRegisterView({super.key});

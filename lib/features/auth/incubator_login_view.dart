@@ -1,17 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:incubator/core/assets/assets.dart';
-import 'package:incubator/core/colors/app_colors.dart';
 import 'package:incubator/core/utils/constants.dart';
-
 import '../../core/shared_components/custom_button.dart';
 import '../../core/shared_components/default_text_form_field.dart';
 import '../../core/text_styles/styles.dart';
+import '../main_layout/presentation/views/main_layout_view.dart';
 
 class IncubatorLoginView extends StatefulWidget {
   IncubatorLoginView({super.key});
@@ -82,7 +80,7 @@ class _IncubatorLoginViewState extends State<IncubatorLoginView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           DefaultTextFormField(
-                            textInputType: TextInputType.text,
+                            textInputType: TextInputType.emailAddress,
                             controller: email,
                             maxLines: 1,
                             hintText: "emailHintText".tr(),
@@ -153,7 +151,9 @@ class _IncubatorLoginViewState extends State<IncubatorLoginView> {
                           ),
                           DefaultButton(
                             onPress: () {
-                              if (formKeyLogin.currentState!.validate()) {}
+                              if (formKeyLogin.currentState!.validate()) {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>const MainLayoutView()));
+                              }
                             },
                             text: 'login'.tr(),
                             borderRadius: AppConstant.sp30(context),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:incubator/core/colors/app_colors.dart';
 import 'package:incubator/core/utils/constants.dart';
-import 'package:incubator/views/onboarding/widgets/progress_dots.dart';
+import 'package:incubator/features/onboarding/widgets/progress_dots.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../../../../core/assets/assets.dart';
@@ -60,29 +60,11 @@ class OnBoardingItem extends StatelessWidget {
                 height: AppConstant.height30(context),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * .55,
-                child: Stack(
+                height: MediaQuery.of(context).size.height * .54,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: AppConstant.width20(context),
-                              top: AppConstant.height20(context)),
-                          child: Image.asset("assets/images/background.png"),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * .54,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          image,
-                        ],
-                      ),
-                    ),
+                    image,
                   ],
                 ),
               ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:incubator/core/utils/constants.dart';
-import 'package:incubator/views/auth/incubator_login_view.dart';
 
 import '../../../core/shared_components/custom_button.dart';
+import '../incubator_login_view.dart';
 import '../incubator_register_view.dart';
 
 Future customAuthPopUpDialog({
