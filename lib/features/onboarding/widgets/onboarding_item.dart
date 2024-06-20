@@ -8,7 +8,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../../../../../core/assets/assets.dart';
 import '../../../../../core/services/local/cache_helper/cache_helper.dart';
 import '../../../../../core/text_styles/styles.dart';
-import '../../auth/auth_intro_view.dart';
+import '../../auth/presentation/auth_intro_view.dart';
 
 class OnBoardingItem extends StatelessWidget {
   const OnBoardingItem(

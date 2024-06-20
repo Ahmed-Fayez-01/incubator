@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:incubator/core/shared_components/custom_button.dart';
 import 'package:incubator/core/utils/constants.dart';
-
-import '../../../core/shared_components/custom_button.dart';
 import '../incubator_login_view.dart';
 import '../incubator_register_view.dart';
 
@@ -38,7 +37,7 @@ Future customAuthPopUpDialog({
                 DefaultButton(
                   onPress: () {
                     Navigator.pop(context);
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>IncubatorLoginView()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>IncubatorLoginView(isParent: true,)));
                   },
                   height: MediaQuery.of(context).size.height*.016,
                   text: "login",

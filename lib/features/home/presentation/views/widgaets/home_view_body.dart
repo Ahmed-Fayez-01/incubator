@@ -4,6 +4,10 @@ import 'package:incubator/core/assets/assets.dart';
 import 'package:incubator/core/shared_components/default_text_form_field.dart';
 import 'package:incubator/core/utils/constants.dart';
 import 'package:incubator/features/cases/presentation/views/cases_view.dart';
+import 'package:incubator/features/incubator/presentation/view/incubator_view.dart';
+import 'package:incubator/features/upload_file/presentation/view/upload_file_view.dart';
+import 'package:incubator/features/visiting/presentation/view/visiting_view.dart';
+import 'package:incubator/features/visiting/presentation/view/widgets/visiting_view_body.dart';
 
 import 'home_item.dart';
 
@@ -94,6 +98,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                       HomeItem(
                           text: ' Incubator',
                           onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const IncubatorView()));
+
                           },
                           image: AssetData.incubator),
                       SizedBox(width: AppConstant.width20(context),),
@@ -111,12 +117,17 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                       HomeItem(
                           text: 'Upload File',
                           onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> const UploadFileView()));
+
                           },
                           image:  AssetData.upload),
                       SizedBox(width: AppConstant.width20(context),),
                       HomeItem(
                           text: 'Visiting',
                           onTap: (){
+
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> const VisitingView()));
+
                           },
                           image:  AssetData.visiting),
                     ],

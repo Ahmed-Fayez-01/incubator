@@ -2,12 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:incubator/features/auth/auth_intro_view.dart';
+import 'package:incubator/features/auth/presentation/auth_intro_view.dart';
 
-import '../../core/assets/assets.dart';
-import '../../core/shared_components/custom_button.dart';
-import '../../core/text_styles/styles.dart';
-import '../../core/utils/constants.dart';
+import '../../../core/assets/assets.dart';
+import '../../../core/shared_components/custom_button.dart';
+import '../../../core/text_styles/styles.dart';
+import '../../../core/utils/constants.dart';
 
 
 class PasswordChangedView extends StatelessWidget {

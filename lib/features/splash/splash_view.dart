@@ -6,7 +6,7 @@ import 'package:incubator/core/text_styles/styles.dart';
 import 'package:incubator/core/utils/constants.dart';
 import '../../core/assets/assets.dart';
 import '../../core/services/local/cache_helper/cache_helper.dart';
-import '../auth/auth_intro_view.dart';
+import '../auth/presentation/auth_intro_view.dart';
 import '../onboarding/onboarding_screen.dart';
 
 class SplashView extends StatefulWidget {
@@ -66,29 +66,27 @@ class _SplashViewState extends State<SplashView> {
               ),
             ],
           ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      AssetData.logo,
-                      fit: BoxFit.cover,
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width * .4,
-                    ),
-                  ],
-                ),
-                SizedBox(height: AppConstant.height10(context),),
-                Text("My Incubator",style: Styles.splashTitle(context).copyWith(
-                  color: Colors.white
-                ),),
-              ],
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    AssetData.logo,
+                    fit: BoxFit.cover,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * .4,
+                  ),
+                ],
+              ),
+              SizedBox(height: AppConstant.height10(context),),
+              Text("My Incubator",style: Styles.splashTitle(context).copyWith(
+                color: Colors.white
+              ),),
+            ],
           ),
         ],
       ),

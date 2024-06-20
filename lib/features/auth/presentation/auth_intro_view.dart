@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:incubator/core/shared_components/custom_button.dart';
+import 'package:incubator/features/auth/presentation/incubator_login_view.dart';
+import 'package:incubator/features/auth/presentation/widgets/custom_auth_dialog.dart';
 
-import '../../core/assets/assets.dart';
-import '../../core/colors/app_colors.dart';
-import 'widgets/custom_auth_dialog.dart';
-import '../../core/text_styles/styles.dart';
-import '../../core/utils/constants.dart';
+import '../../../core/assets/assets.dart';
+import '../../../core/colors/app_colors.dart';
+import '../../../core/text_styles/styles.dart';
+import '../../../core/utils/constants.dart';
 
 class AuthIntroView extends StatelessWidget {
   const AuthIntroView({super.key});
@@ -74,7 +75,7 @@ class AuthIntroView extends StatelessWidget {
                   ),
                   DefaultButton(
                     onPress: () {
-                      customAuthPopUpDialog(context: context);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>IncubatorLoginView()));
                     },
                     text: "login as Incubator",
                     borderRadius: AppConstant.sp30(context),
@@ -83,7 +84,9 @@ class AuthIntroView extends StatelessWidget {
                     height: AppConstant.height15(context),
                   ),
                   DefaultButton(
-                    onPress: () {},
+                    onPress: () {
+                      customAuthPopUpDialog(context: context);
+                    },
                     text: "login as parents",
                     borderRadius: AppConstant.sp30(context),
                   ),

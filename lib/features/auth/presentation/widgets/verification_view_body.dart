@@ -1,16 +1,13 @@
-
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:incubator/features/auth/auth_intro_view.dart';
-import 'package:incubator/features/auth/reset_password_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:incubator/core/colors/app_colors.dart';
+import 'package:incubator/core/shared_components/custom_button.dart';
+import 'package:incubator/core/utils/constants.dart';
+import 'package:incubator/features/auth/presentation/reset_password_view.dart';
+import 'package:incubator/features/auth/presentation/view_model/send_otp/send_otp_cubit.dart';
+import 'package:incubator/features/auth/presentation/view_model/send_otp/send_otp_states.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:timer_count_down/timer_count_down.dart';
-
-import '../../../core/assets/assets.dart';
-import '../../../core/colors/app_colors.dart';
-import '../../../core/shared_components/custom_button.dart';
-import '../../../core/utils/constants.dart';
 
 class VerificationViewBody extends StatefulWidget {
   const VerificationViewBody({super.key, required this.email});
@@ -54,10 +51,12 @@ class _VerificationViewBodyState extends State<VerificationViewBody> {
                 Text(
                   "Please check your email",
                   style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.height * .026, fontWeight: FontWeight.w800,color: Color(0xffF59E0B)),
+                      fontSize: MediaQuery.of(context).size.height * .026,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xffF59E0B)),
                 ),
                 SizedBox(
-                  height: AppConstant.height20(context)*2,
+                  height: AppConstant.height20(context) * 2,
                 ),
                 RichText(
                   textAlign: TextAlign.center,
@@ -67,23 +66,29 @@ class _VerificationViewBodyState extends State<VerificationViewBody> {
                       TextSpan(
                         text: 'Please enter the 6-digit code sent to your email ',
                         style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height * .02, fontWeight: FontWeight.w400,color: const Color(0x80000000)),
+                            fontSize: MediaQuery.of(context).size.height * .02,
+                            fontWeight: FontWeight.w400,
+                            color: const Color(0x80000000)),
                       ),
                       TextSpan(
                         text: '${widget.email} ',
                         style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height * .02, fontWeight: FontWeight.w400,color: const Color(0xffF59E0B)),
+                            fontSize: MediaQuery.of(context).size.height * .02,
+                            fontWeight: FontWeight.w400,
+                            color: const Color(0xffF59E0B)),
                       ),
                       TextSpan(
                         text: 'for verification.',
                         style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height * .02, fontWeight: FontWeight.w400,color: const Color(0x80000000)),
+                            fontSize: MediaQuery.of(context).size.height * .02,
+                            fontWeight: FontWeight.w400,
+                            color: const Color(0x80000000)),
                       ),
                     ],
                   ),
                 ),
                 SizedBox(
-                  height: AppConstant.height30(context)*2,
+                  height: AppConstant.height30(context) * 2,
                 ),
                 Form(
                   key: _formKey,
@@ -132,51 +137,75 @@ class _VerificationViewBodyState extends State<VerificationViewBody> {
                   ),
                 ),
                 SizedBox(
-                  height: AppConstant.height30(context)*2,
+                  height: AppConstant.height30(context) * 2,
                 ),
-                DefaultButton(
-                    onPress: () {
-                      if (_formKey.currentState!.validate()) {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const ResetPasswordView(email: "email", code: "code")));
-                      }
-                    },
-                    text: 'Verify',
-                    borderRadius: AppConstant.sp30(context)),
+                BlocConsumer<SendOtpCubit, SendOtpStates>(listener: (context, state) {
+                  if (state is SendOtpSuccessState) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Otp code is correct"),
+                      backgroundColor: Colors.green,
+                    ));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ResetPasswordView(email: widget.email, code: otpCode.text)));
+                  } else if (state is SendOtpErrorState) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(state.error),
+                      backgroundColor: Colors.red,
+                    ));
+                  }
+                }, builder: (context, state) {
+                  return state is SendOtpLoadingState
+                      ? const Center(child: CircularProgressIndicator())
+                      : DefaultButton(
+                          onPress: () {
+                            if (_formKey.currentState!.validate()) {
+                              context.read<SendOtpCubit>().sendOtp(otp: otpCode.text);
+                            }
+                          },
+                          text: 'Verify',
+                          borderRadius: AppConstant.sp30(context));
+                }),
                 SizedBox(
                   height: AppConstant.height10(context),
                 ),
                 finished
                     ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          finished=!finished;
-                        });
-                      },
-                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            "Didn’t receive any code?",
-                            style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.height * .015,
-                                fontWeight: FontWeight.w500,
-                                color: const Color(0xff101010)),
-                          ),
-                          SizedBox(width: AppConstant.width5(context),),
-                          Text(
-                            "Resend Again",
-                            style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.height * .015,
-                                fontWeight: FontWeight.w500,
-                                color: CustomColor.primaryColor),
+                          GestureDetector(
+                            onTap: () {
+                              context.read<SendOtpCubit>().sendOtp(otp: otpCode.text);
+                              setState(() {
+                                finished = !finished;
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Didn’t receive any code?",
+                                  style: TextStyle(
+                                      fontSize: MediaQuery.of(context).size.height * .015,
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xff101010)),
+                                ),
+                                SizedBox(
+                                  width: AppConstant.width5(context),
+                                ),
+                                Text(
+                                  "Resend Again",
+                                  style: TextStyle(
+                                      fontSize: MediaQuery.of(context).size.height * .015,
+                                      fontWeight: FontWeight.w500,
+                                      color: CustomColor.primaryColor),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
-                      ),
-                    ),
-                  ],
-                )
+                      )
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -189,7 +218,7 @@ class _VerificationViewBodyState extends State<VerificationViewBody> {
                           Countdown(
                             seconds: 120,
                             build: (BuildContext context, double time) => Text(
-                              "${(time~/60).toString()}:${(time.toInt()%60).toInt()}",
+                              "${(time ~/ 60).toString()}:${(time.toInt() % 60).toInt()}",
                               style: TextStyle(
                                   fontSize: MediaQuery.of(context).size.height * .015,
                                   fontWeight: FontWeight.w500,
