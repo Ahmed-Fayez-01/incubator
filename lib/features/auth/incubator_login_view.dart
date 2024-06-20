@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:incubator/core/assets/assets.dart';
 import 'package:incubator/core/utils/constants.dart';
+import 'package:incubator/features/auth/forget_password_view.dart';
 import '../../core/shared_components/custom_button.dart';
 import '../../core/shared_components/default_text_form_field.dart';
 import '../../core/text_styles/styles.dart';
@@ -134,7 +135,9 @@ class _IncubatorLoginViewState extends State<IncubatorLoginView> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgetPasswordView()));
+                                },
                                 child: Text(
                                   "forgetPasswordText".tr(),
                                   style:

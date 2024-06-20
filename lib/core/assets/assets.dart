@@ -38,4 +38,6 @@ class AssetData {
   static const edit="assets/images/edit.svg";
   static const time="assets/images/time.svg";
   static const noData="assets/images/no_data.svg";
+  static const congratulation="assets/images/congratulation.svg";
+
 }
