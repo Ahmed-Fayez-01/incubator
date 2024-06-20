@@ -27,7 +27,9 @@ class NotificationViewBody extends StatelessWidget {
                   ),),
                 ],
               ),
-              SvgPicture.asset(AssetData.pageBack,width: MediaQuery.of(context).size.height*.015,),
+              InkWell(onTap: (){
+                Navigator.pop(context);
+              },child: SvgPicture.asset(AssetData.pageBack,width: MediaQuery.of(context).size.height*.02,)),
             ],
           ),
         ),

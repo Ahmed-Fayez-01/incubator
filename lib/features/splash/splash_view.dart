@@ -21,7 +21,7 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2), () {
-      if(CacheHelper.getData(key: "onBoarding", dataType: DataType.bool)==true)
+      if(CacheHelper.getData(key: "onBoarding")==true)
         {
           Navigator.pushAndRemoveUntil(
               context, MaterialPageRoute(builder: (context) => const AuthIntroView()), (

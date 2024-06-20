@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:incubator/core/assets/assets.dart';
 import 'package:incubator/core/shared_components/default_text_form_field.dart';
 import 'package:incubator/core/utils/constants.dart';
+import 'package:incubator/features/cases/presentation/views/cases_view.dart';
 
 import 'home_item.dart';
 
@@ -90,23 +91,34 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 children: [
                   Row(
                     children: [
-                      const HomeItem(
-                          text: ' Reports',
-                          image: AssetData.circleUser),
+                      HomeItem(
+                          text: ' Incubator',
+                          onTap: (){
+                          },
+                          image: AssetData.incubator),
                       SizedBox(width: AppConstant.width20(context),),
-                      const HomeItem(
-                          text: ' Visiting Dates',
-                          image:  AssetData.file)
+                      HomeItem(
+                          text: 'Cases',
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const CasesView()));
+                          },
+                          image:  AssetData.cases)
                     ],
                   ),
                   SizedBox(height: AppConstant.height20(context),),
                   Row(
                     children: [
-                      const HomeItem(
-                          text: '  View a File',
-                          image:  AssetData.phFile),
+                      HomeItem(
+                          text: 'Upload File',
+                          onTap: (){
+                          },
+                          image:  AssetData.upload),
                       SizedBox(width: AppConstant.width20(context),),
-                      const Expanded(child: SizedBox()),
+                      HomeItem(
+                          text: 'Visiting',
+                          onTap: (){
+                          },
+                          image:  AssetData.visiting),
                     ],
                   )
                 ],

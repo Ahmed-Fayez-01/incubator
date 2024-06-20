@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../features/cases/data/models/cases_model.dart';
+
 class AppConstant{
+  static List<Cases> model=[];
+  static List<Cases> foundedItems=[];
   static int selectedIndex = 0;
   static sp10(context){
     var height=MediaQuery.of(context).size.height*.012;

@@ -31,4 +31,11 @@ class AssetData {
   static const exit="assets/images/exit.svg";
   static const pageBack="assets/images/page_back.svg";
   static const bell="assets/images/bell.svg";
+  static const cases="assets/images/cases.svg";
+  static const upload="assets/images/upload.svg";
+  static const visiting="assets/images/visiting.svg";
+  static const incubator="assets/images/incubator.svg";
+  static const edit="assets/images/edit.svg";
+  static const time="assets/images/time.svg";
+  static const noData="assets/images/no_data.svg";
 }

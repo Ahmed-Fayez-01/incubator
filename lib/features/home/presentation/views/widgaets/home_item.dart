@@ -8,10 +8,11 @@ class HomeItem extends StatelessWidget {
   const HomeItem(
       {super.key,
         required this.text,
-        required this.image,
+        required this.image, this.onTap,
       });
   final String text;
   final String image;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class HomeItem extends StatelessWidget {
                 fit: BoxFit.contain,
               ),
             ),
-            DefaultButton(onPress: (){}, text: text,borderRadius: AppConstant.sp20(context),height: AppConstant.height10(context),),
+            DefaultButton(onPress: onTap, text: text,borderRadius: AppConstant.sp20(context),height: AppConstant.height10(context),),
           ],
         ),
       ),
