@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:incubator/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:incubator/features/cases/data/repos/cases_repo_impl.dart';
+import 'package:incubator/features/incubator/data/repos/incubator_repo_impl.dart';
 import 'api_service.dart';
 //dependency Injection
 
@@ -13,6 +14,9 @@ void setup() {
     getIt.get<ApiService>(),
   ));
   getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl(
+    getIt.get<ApiService>(),
+  ));
+  getIt.registerSingleton<IncubatorRepoImpl>(IncubatorRepoImpl(
     getIt.get<ApiService>(),
   ));
 }

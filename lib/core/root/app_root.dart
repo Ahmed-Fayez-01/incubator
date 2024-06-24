@@ -9,6 +9,8 @@ import 'package:incubator/features/auth/presentation/view_model/register/registe
 import 'package:incubator/features/auth/presentation/view_model/send_otp/send_otp_cubit.dart';
 import 'package:incubator/features/cases/data/repos/cases_repo_impl.dart';
 import 'package:incubator/features/cases/presentation/view_models/get_all_cases/get_all_cases_cubit.dart';
+import 'package:incubator/features/incubator/data/repos/incubator_repo_impl.dart';
+import 'package:incubator/features/incubator/presentation/view_models/add_case/add_case_cubit.dart';
 import 'package:incubator/features/upload_file/presentation/view_model/upload_file_cubit/upload_file_cubit.dart';
 
 import '../../features/splash/splash_view.dart';
@@ -58,6 +60,10 @@ class _AppRootState extends State<AppRoot> {
               create: (context) => SendOtpCubit(
                     getIt.get<AuthRepoImpl>(),
                   )),
+          BlocProvider(
+              create: (context) => AddCaseCubit(
+                getIt.get<IncubatorRepoImpl>(),
+              )),
           BlocProvider(create: (context) => UploadFileCubit()),
         ],
         child: ScreenUtilInit(

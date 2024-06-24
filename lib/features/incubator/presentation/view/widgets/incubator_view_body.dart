@@ -1,12 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:incubator/core/assets/assets.dart';
 import 'package:incubator/core/colors/app_colors.dart';
 import 'package:incubator/core/shared_components/custom_button.dart';
 import 'package:incubator/core/shared_components/default_text_form_field.dart';
 import 'package:incubator/core/text_styles/styles.dart';
 import 'package:incubator/core/utils/constants.dart';
+import 'package:incubator/features/incubator/presentation/view_models/add_case/add_case_cubit.dart';
+import 'package:incubator/features/incubator/presentation/view_models/add_case/add_case_states.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+
+import '../../../../main_layout/presentation/views/main_layout_view.dart';
 
 class IncubatorViewBody extends StatefulWidget {
   IncubatorViewBody({super.key});
@@ -110,40 +117,23 @@ class _IncubatorViewBodyState extends State<IncubatorViewBody> {
                   DefaultTextFormField(
                     textInputType: TextInputType.text,
                     controller: name,
-                    hintText: "Enter your name",
-                    prefixIcon: const Icon(CupertinoIcons.person),
+                    hintText: "Enter Case Name",
+                    prefixIcon: SvgPicture.asset(AssetData.user,fit: BoxFit.scaleDown,),
                     validationMsg: "please enter your name",
                     borderRadius: AppConstant.sp30(context),
                   ),
                   SizedBox(height: AppConstant.height20(context)*1.5,),
                   DefaultTextFormField(
-                    textInputType: TextInputType.phone,
+                    textInputType: TextInputType.text,
                     controller: phone,
-                    hintText: "Enter your phone number",
-                    prefixIcon: const Icon(CupertinoIcons.device_phone_portrait),
-                    validationMsg: "please enter your phone number",
+                    prefixIcon: SvgPicture.asset(AssetData.disease,fit: BoxFit.scaleDown,color: const Color(0x80000000),),
+                    hintText: "Enter Case Disease",
+                    validationMsg: "please enter case disease",
                     borderRadius: AppConstant.sp30(context),
                   ),
                   SizedBox(height: AppConstant.height20(context)*1.5,),
                   Row(
                     children: [
-                      Flexible(
-                        child: DefaultTextFormField(
-                          textInputType: TextInputType.text,
-                          controller: day,
-                          hintText: "Day :",
-                          prefixIcon: const Icon(CupertinoIcons.calendar),
-                          validationMsg: "please select the day",
-                          borderRadius: AppConstant.sp30(context),
-                          readOnly: true,
-                          onTap: (){
-                            showDatePicker(context: context, firstDate: DateTime.now(), lastDate: DateTime(2080,1,1)).then((value) {
-                              day.text=DateFormat.yMd().format(value!);
-                            });
-                          },
-                        ),
-                      ),
-                      SizedBox(width: AppConstant.width10(context),),
                       Flexible(
                         child: DefaultTextFormField(
                           textInputType: TextInputType.number,
@@ -180,11 +170,43 @@ class _IncubatorViewBodyState extends State<IncubatorViewBody> {
                     ],
                   ),
                   SizedBox(height: AppConstant.height20(context)*2,),
-                  DefaultButton(onPress: (){
-                    if(formKey.currentState!.validate()){
-                      
-                    }
-                  }, text: "Save",borderRadius: AppConstant.sp30(context),),
+                  BlocConsumer<AddCaseCubit, AddCaseStates>(
+                    listener: (context, state) {
+                      if (state is AddCaseSuccessState) {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("AddCase Successfully"),
+                          backgroundColor: Colors.green,
+                        ));
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => const MainLayoutView()),
+                                (route) => false);
+                      } else if (state is AddCaseErrorState) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(state.error),
+                          backgroundColor: Colors.red,
+                        ));
+                      }
+                    },
+                    builder: (context, state) {
+                      return state is AddCaseLoadingState
+                          ? const Center(child: CircularProgressIndicator())
+                          : DefaultButton(
+                        onPress: () {
+                          if (formKey.currentState!.validate()) {
+                            context.read<AddCaseCubit>().addCase(data: {
+                              "fullName" : name.text,
+                              "code" : code.text,
+                              "disease" : phone.text,
+                              "age" : age.text
+                            });
+                          }
+                        },
+                        text: 'Save'.tr(),
+                        borderRadius: AppConstant.sp30(context),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

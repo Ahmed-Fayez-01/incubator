@@ -39,6 +39,7 @@ dependencies:
   bloc: ^8.1.0
   dio: ^5.3.0
   dartz: ^0.10.1
+  get_it: ^7.6.0
   shared_preferences: ^2.0.15
   file_picker: ^6.1.1
   loading_indicator: ^3.1.0
@@ -54,7 +55,7 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   cached_network_image: ^3.3.0
   shimmer: ^3.0.0
-  get_it: ^7.6.0
+
   internet_connection_checker: ^1.0.0+1
   pin_code_fields:
   timer_count_down: ^2.2.2
