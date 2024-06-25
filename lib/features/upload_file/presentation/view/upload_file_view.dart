@@ -3,8 +3,8 @@ import 'package:incubator/features/upload_file/presentation/view/widgets/upload_
 
 
 class UploadFileView extends StatelessWidget {
-  const UploadFileView({super.key});
-
+  const UploadFileView({super.key, required this.caseId});
+final String caseId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +22,7 @@ class UploadFileView extends StatelessWidget {
         ),),
         shadowColor: Colors.transparent,
       ),
-      body: const UploadFileViewBody(),
+      body:  UploadFileViewBody(caseId: caseId,),
 
     );
   }

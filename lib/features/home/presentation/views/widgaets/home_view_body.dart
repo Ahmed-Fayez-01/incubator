@@ -117,7 +117,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                       HomeItem(
                           text: 'Upload File',
                           onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> const UploadFileView()));
+                            // Navigator.push(context, MaterialPageRoute(builder: (context)=> const UploadFileView()));
 
                           },
                           image:  AssetData.upload),

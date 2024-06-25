@@ -13,7 +13,10 @@ class UploadFileCubit extends Cubit<UploadFileState> {
   File? selectedFile;
 
   selectFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
 
     if (result != null) {
       selectedFile = File(result.files.single.path!);

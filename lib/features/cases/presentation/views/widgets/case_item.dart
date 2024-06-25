@@ -13,7 +13,7 @@ class CaseItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>const CaseDetailsView()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> CaseDetailsView(instance: instance,)));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal:AppConstant.width20(context),vertical: AppConstant.height10(context)),

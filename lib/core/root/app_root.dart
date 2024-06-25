@@ -13,6 +13,7 @@ import 'package:incubator/features/incubator/data/repos/incubator_repo_impl.dart
 import 'package:incubator/features/incubator/presentation/view_models/add_case/add_case_cubit.dart';
 import 'package:incubator/features/upload_file/presentation/view_model/upload_file_cubit/upload_file_cubit.dart';
 
+import '../../features/cases/presentation/view_models/send_file/send_file_cubit.dart';
 import '../../features/splash/splash_view.dart';
 import '../services/local/cache_helper/cache_helper.dart';
 import '../services/local/cache_helper/cache_keys.dart';
@@ -63,6 +64,10 @@ class _AppRootState extends State<AppRoot> {
           BlocProvider(
               create: (context) => AddCaseCubit(
                 getIt.get<IncubatorRepoImpl>(),
+              )),
+          BlocProvider(
+              create: (context) => SendFileCubit(
+                getIt.get<CaseRepoImpl>(),
               )),
           BlocProvider(create: (context) => UploadFileCubit()),
         ],

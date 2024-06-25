@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:incubator/features/cases/presentation/views/widgets/case_details_view_body.dart';
 
-class CaseDetailsView extends StatelessWidget {
-  const CaseDetailsView({super.key});
+import '../../data/models/cases_model.dart';
 
+class CaseDetailsView extends StatelessWidget {
+  const CaseDetailsView({super.key, required this.instance});
+  final Cases instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +22,7 @@ class CaseDetailsView extends StatelessWidget {
           ),
         ),
       ),
-      body: const CaseDetailsViewBody(),
+      body: CaseDetailsViewBody(instance: instance,),
     );
   }
 }

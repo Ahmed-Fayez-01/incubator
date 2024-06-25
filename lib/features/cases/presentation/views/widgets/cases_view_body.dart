@@ -136,7 +136,16 @@ class _CasesViewBodyState extends State<CasesViewBody> {
                 ],
               ),
             );
-          } else {
+          } else if(state is UserGetAllCasesErrorState){
+            return Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(state.errMessage),
+                ],
+              ),
+            );
+          }else  {
             return Expanded(
               child: Padding(
                 padding:
